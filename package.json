@@ -1,0 +1,21 @@
+{
+  "name": "sport-api",
+  "version": "1.0.0",
+  "description": "api nodejs example",
+  "main": "app/index.js",
+  "repository": "git@github.com:dancespiele/sport-api.git",
+  "author": "Francisco Jesus Navarro Cortes",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "jwt-simple": "^0.5.1",
+    "moment": "^2.22.0",
+    "mongoose": "^5.0.13",
+    "nodemon": "^1.17.3"
+  },
+  "scripts": {
+    "start": "./node_modules/.bin/nodemon --watch 'app/**/**' ./app/index.js"
+  }
+}
