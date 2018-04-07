@@ -2,7 +2,7 @@ const activitiesModel = require("./model");
 const checkPermision = require("../../modules/permisions");
 
 module.exports = function(app) {
-    app.get("/activities/:user_id", async (req, res) => {
+    app.get("/activities", async (req, res) => {
         const userId = req.params.user_id;
 
         try {
@@ -20,7 +20,7 @@ module.exports = function(app) {
 
         try {
             const response = await activitiesModel
-                .find({activity_id: activityId});
+                .find({_id: activityId});
 
             res.send(response);
         } catch (error) {
@@ -31,6 +31,7 @@ module.exports = function(app) {
 
     app.post("/activities", async (req, res) => {
         const activity = req.body;
+        activity.user_id = req.logedUser._id;
         try {
             const response = await activitiesModel.create(activity);
 
@@ -45,7 +46,7 @@ module.exports = function(app) {
         const activity = req.body;
         try {
             const response = await activitiesModel
-                .where({activity_id: activityId})
+                .where({_id: activityId})
                 .update(activity);
 
             res.send(response);
@@ -65,7 +66,7 @@ module.exports = function(app) {
 
         try {
             const response = await activitiesModel
-                .find({activity_id: activityId})
+                .find({_id: activityId})
                 .remove();
             res.send(activityId);
         } catch(error) {

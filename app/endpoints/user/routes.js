@@ -4,10 +4,10 @@ const userModel = require("./model");
 
 module.exports = function(app){
     
-    app.get("/user", async (req, res) => {
+    app.post("/user", async (req, res) => {
         const login = req.body;
         try {
-            const user = await userModel.findOne({id: login.id});
+            const user = await userModel.findOne({username: login.username});
             const isvalid = await bcrypt.compare(login.password, user.password);
             if (!isvalid) {
                 res.status(401).send({
