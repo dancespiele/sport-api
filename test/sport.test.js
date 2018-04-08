@@ -122,4 +122,21 @@ lab.experiment("Sport", () => {
 
         Code.expect(response).to.be.equal(activityId);
     });
+
+    lab.test("Hasn't to allow to execute delete", async() => {
+        login.body = {username: "paco", password: "test"}
+
+        const response = await request(login);
+
+        token = response.token;
+        Code.expect(token).to.exist();
+
+        activity.headers = { "Authorization": `Bearer ${token}`}
+
+        try {
+            const response = await request(activity);
+        } catch(err) {
+            Code.expect(err.error.message).to.be.equal("not allowed");
+        }
+    });
 })

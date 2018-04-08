@@ -10,6 +10,11 @@ const connect = mongoose.connect(`mongodb://${globalConfig.mongodb.username}:` +
 app.use(bodyparser.json());
 app.use(cors());
 
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path}`);
+    next();
+});
+
 require("./endpoints")(app);
 
 connect.then(() => {
