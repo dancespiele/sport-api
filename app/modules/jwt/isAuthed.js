@@ -7,7 +7,7 @@ const isAuthed = (req, res, next) => {
 		return res
 		.status(403)
 		.send({
-			error: 'Invalid Token'
+			message: 'Missing authorization header'
 		});
     }
 
@@ -18,17 +18,17 @@ const isAuthed = (req, res, next) => {
 		payload = jwt.decode(token, config.secret);
 	} catch (error) {
 		return res
-		.status(401)
+		.status(403)
 		.send({
-			error: 'Invalid Token'
+			message: 'Invalid Token'
 		});
 	}
 
 	if (payload.exp <= moment().unix()) {
 		return res
-		.status(401)
+		.status(403)
 		.send({
-			error: 'Expired Token'
+			message: 'Expired Token'
 		});
 	}
 

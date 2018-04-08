@@ -1,6 +1,6 @@
 const config = {
-    "secret": process.env.secret,
-    "exp": process.env.exp,
+    "secret": process.env.SECRET,
+    "exp": process.env.EXP,
 };
 
 module.exports = config;

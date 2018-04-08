@@ -4,7 +4,7 @@ const userModel = require("./model");
 
 module.exports = function(app){
     
-    app.post("/user", async (req, res) => {
+    app.post("/users", async (req, res) => {
         const login = req.body;
         try {
             const user = await userModel.findOne({username: login.username});
@@ -15,7 +15,7 @@ module.exports = function(app){
                 });
             }
             
-            return createToken(user);
+            res.send(createToken(user));
         } catch (error) {
             res.status(500).send(error);
         }

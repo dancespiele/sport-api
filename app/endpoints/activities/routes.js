@@ -3,11 +3,10 @@ const checkPermision = require("../../modules/permisions");
 
 module.exports = function(app) {
     app.get("/activities", async (req, res) => {
-        const userId = req.params.user_id;
-
+        const query = req.query;
         try {
             const response = await activitiesModel
-                .find({user_id: userId});
+                .find(query);
 
             res.send(response);
         } catch (error) {
@@ -15,12 +14,12 @@ module.exports = function(app) {
         } 
     });
 
-    app.get("/activities/:activity_id", async (req, res) => {
-        const activityId = req.params.activity_id;
+    app.get("/activities/:activityId", async (req, res) => {
+        const activityId = req.params.activityId;
 
         try {
             const response = await activitiesModel
-                .find({_id: activityId});
+                .findOne({_id: activityId});
 
             res.send(response);
         } catch (error) {
@@ -31,7 +30,7 @@ module.exports = function(app) {
 
     app.post("/activities", async (req, res) => {
         const activity = req.body;
-        activity.user_id = req.logedUser._id;
+        activity.user_id = req.logedUser.id;
         try {
             const response = await activitiesModel.create(activity);
 
@@ -41,8 +40,8 @@ module.exports = function(app) {
         }
     });
 
-    app.put("/activities/:activity_id", async (req, res) => {
-        const activityId = req.params.activity_id;
+    app.put("/activities/:activityId", async (req, res) => {
+        const activityId = req.params.activityId;
         const activity = req.body;
         try {
             const response = await activitiesModel
@@ -55,14 +54,16 @@ module.exports = function(app) {
         }
     });
 
-    app.use("/activities/:activity_id", (req, res, next) => {
+    app.use("/activities/:activityId", (req, res, next) => {
         if(req.method === "DELETE") {
             return checkPermision("admin", req, res, next);
         }
+
+        return next();
     });
 
-    app.delete("/activities/:activity_id", async (req, res) => {
-        const activityId = req.params.activity_id;
+    app.delete("/activities/:activityId", async (req, res) => {
+        const activityId = req.params.activityId;
 
         try {
             const response = await activitiesModel

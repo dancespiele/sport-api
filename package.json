@@ -17,6 +17,13 @@
     "nodemon": "^1.17.3"
   },
   "scripts": {
+    "test": "node_modules/lab/bin/lab -v -l test/sport.test.js",
     "watch": "sh run.sh"
+  },
+  "devDependencies": {
+    "code": "^5.2.0",
+    "lab": "^15.4.1",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
   }
 }

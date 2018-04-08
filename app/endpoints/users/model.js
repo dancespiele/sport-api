@@ -8,6 +8,6 @@ const schema = new Schema({
     permissions: Array
 });
 
-const User = mongoose.model("user", schema);
+const User = mongoose.model("users", schema);
 
 module.exports = User;

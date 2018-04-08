@@ -4,7 +4,7 @@ const config = require("./config");
 
 const createToken = user => {
     const payload = {
-        user: {id: user._id, permision: user.permision},
+        user: {id: user._id, permissions: user.permissions},
         iat: moment().unix(),
         exp: moment().add(config.exp, "days").unix(),
     };
