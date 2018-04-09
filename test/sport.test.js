@@ -16,7 +16,6 @@ lab.experiment("Sport", () => {
         login.body = {username: "admin", password: "test"}
 
         const response = await request(login);
-
         token = response.token;
         Code.expect(token).to.exist();
     });
@@ -139,4 +138,4 @@ lab.experiment("Sport", () => {
             Code.expect(err.error.message).to.be.equal("not allowed");
         }
     });
-})
+});
