@@ -20,7 +20,7 @@ Enter to the folder and execute:
 
 Create database in mongo with the name ***sport***, create an user asigned to it and import the file `collection/users.json`.
 
-`mongoimport --db sport --collection users --file users.json`
+`mongoimport --db sport --collection users --file collection/users.json`
 
 Create a script file ***run.sh*** in root path of the project:
 
